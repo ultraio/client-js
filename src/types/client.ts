@@ -20,6 +20,7 @@ import {
   StateKeyType,
   StateTableScopesResponse,
   StateTableRowResponse,
+  StateKvToJsonResponse,
 } from "./state"
 import { Stream } from "./stream"
 import { HttpQueryParameters, HttpHeaders } from "./http-client"
@@ -637,4 +638,28 @@ export interface DfuseClient {
    * @returns A `Promise` that will resolve to a valid [[ApiTokenInfo]] instance, or will reject if an error occurs retrieving the API token.
    */
   getTokenInfo: () => Promise<ApiTokenInfo>
+
+  /**
+   * `POST /v0/state/abi/kv_to_json`
+   *
+   * Decode kv hex data to json data.
+   *
+   * @param account Contract account targeted by the action.
+   * balances for tokens live in the accounts table. Refer to the contract's ABI for
+   * a list of available tables. This is contract dependent.
+   * @param hexRows An array of hexadecimal rows to decode. Each row must be a valid
+   * hexadecimal string representation of the row to decode against the ABI.
+   * @param options (optional) Optional parameters
+   * @param options.blockNum (defaults `undefined`) The block number for which you want
+   * to retrieve the consistent table snapshot. Defaults to `0` which means `Last Head Block`.
+   *
+   * @see
+   */
+  stateAbiKvToJson<T = unknown>(
+    account: string,
+    hexRows: string[],
+    options?: {
+      blockNum?: number
+    }
+  ): Promise<StateKvToJsonResponse<T>>
 }

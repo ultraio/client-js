@@ -17,6 +17,8 @@ export const V0_STATE_TABLE_SCOPES = "/v0/state/table_scopes"
 
 export const V0_SEARCH_TRANSACTIONS = "/v0/search/transactions"
 
+export const V0_STATE_ABI_KV_TO_JSON = "/v0/state/abi/kv_to_json"
+
 /**
  * An interface used to interact with dfuse REST API.
  *

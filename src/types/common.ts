@@ -107,3 +107,20 @@ export type TableOp = {
   payer: string
   path: string
 }
+
+export type KvOp<T = unknown> = {
+  op: "ins" | "INS" | "upd" | "UPD" | "rem" | "REM"
+  action_idx: number
+  account: string
+  key: string
+  old?: KvRow<T>
+  new?: KvRow<T>
+}
+
+export type KvRow<T = unknown> = {
+  payer: string
+  blockNum?: string
+  error?: ErrorData
+  hex?: string
+  json?: T
+}

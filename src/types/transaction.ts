@@ -1,5 +1,5 @@
 import { ActionTrace, Action } from "./action-trace"
-import { ExtDTrxOp, DTrxOp, DbOp, RamOp, TableOp, CreationNode } from "./common"
+import { ExtDTrxOp, DTrxOp, DbOp, RamOp, TableOp, CreationNode, KvOp } from "./common"
 
 export type TransactionLifecycleData = {
   lifecycle: TransactionLifecycle
@@ -31,6 +31,7 @@ export type TransactionLifecycle = {
   tableops?: TableOp[]
   pub_keys?: string[]
   creation_tree?: CreationNode[]
+  kvops?: KvOp[]
 }
 
 export type Transaction = {

@@ -22,6 +22,7 @@ import {
   MultiStateResponse,
   StatePermissionLinksResponse,
   StateTableRowResponse,
+  StateKvToJsonResponse,
 } from "../types/state"
 import {
   ApiTokenManager,
@@ -46,6 +47,7 @@ import {
   V0_FETCH_TRANSACTION,
   V0_FETCH_BLOCK_ID_BY_TIME,
   V0_STATE_TABLE_ROW,
+  V0_STATE_ABI_KV_TO_JSON,
 } from "../types/http-client"
 import { DfuseClientError, DfuseError } from "../types/error"
 import { createStreamClient, StreamClientOptions } from "./stream-client"
@@ -856,6 +858,18 @@ export class DefaultClient implements DfuseClient {
         "Content-Type": "application/x-www-form-urlencoded",
       }
     )
+  }
+
+  public async stateAbiKvToJson<T = unknown>(
+    account: string,
+    hexRows: string[],
+    options: { blockNum?: number } = {}
+  ): Promise<StateKvToJsonResponse<T>> {
+    return this.apiRequest<StateKvToJsonResponse<T>>(V0_STATE_ABI_KV_TO_JSON, "POST", undefined, {
+      account,
+      hex_rows: hexRows,
+      block_num: options.blockNum,
+    })
   }
 
   public async apiRequest<T>(

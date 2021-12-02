@@ -139,3 +139,9 @@ export type StateTableRowResponse<T = unknown> = {
   abi?: Abi
   row: DbRow<T>
 }
+
+export type StateKvToJsonResponse<T = unknown> = {
+  block_num: number
+  account: string
+  rows: T[]
+}
